@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: directory-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: directory-service
+  template:
+    metadata:
+      labels:
+        app: directory-service
+    spec:
+      containers:
+        - name: directory-service
+          image: sebastianbran/poc-cce-demo-directory-service:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: directory-service-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: directory-service
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
