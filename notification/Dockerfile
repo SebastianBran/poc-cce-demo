@@ -5,7 +5,7 @@ COPY . .
 RUN mvn -pl notification -am clean package -DskipTests
 
 # Etapa de ejecución
-FROM openjdk:21-jdk-slim
+FROM registry.access.redhat.com/ubi9/openjdk-21
 WORKDIR /app
 
 # Copiar el jar del submódulo
